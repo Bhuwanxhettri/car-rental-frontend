@@ -14,25 +14,23 @@ const Signin = () => {
 
   const signinUser = async (e) => {
     e.preventDefault();
-    const res = await fetch(
-      `${URL}https://car-rental-backend-5z6p.onrender.com/signin`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      }
-    );
-    const data = res.json();
+    const res = await fetch(`${URL}/signin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
 
+    const data = await res.json();
     if (res.status === 400 || !data) {
       window.alert("invalid Credentials");
     } else {
       dispatch({ type: "USER", payload: true });
+      localStorage.setItem("token",data.token);
       window.alert("Signin Successfull");
       history("/");
     }

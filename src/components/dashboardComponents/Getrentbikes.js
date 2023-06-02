@@ -7,12 +7,14 @@ const Getrentbikes = () => {
   const { adminState, dispatchadmin } = useContext(AdminContext);
 
   const [getBikes, setGetBikes] = useState([]);
+  const URL = process.env.REACT_APP_BASE_URL;
 
   const getallrenttbikes = async () => {
     try {
-      const res = await fetch("/getAvailableRentBikes", {
+      const res = await fetch(`${URL}/getAvailableRentBikes`, {
         method: "GET",
       });
+    
 
       const data = await res.json();
       setGetBikes(data);
@@ -20,7 +22,6 @@ const Getrentbikes = () => {
       console.log(error);
     }
   };
-  const URL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
     getallrenttbikes();
@@ -70,7 +71,7 @@ const Getrentbikes = () => {
       <div className="sidebar">
         <div className="logo-details">
           <i className=""></i>
-          <span className="logo_name1">Bike</span>
+          <span className="logo_name1">Vheciles</span>
           <span className="logo_name">Book</span>
         </div>
         <ul className="nav-links">

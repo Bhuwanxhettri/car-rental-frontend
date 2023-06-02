@@ -7,11 +7,11 @@ const Availableusers = () => {
   const {adminState, dispatchadmin} = useContext(AdminContext)
 
   const [getUsers, setGetUsers] = useState([]);
-
+  const URL = process.env.REACT_APP_BASE_URL;
 
   const getallusers = async () =>{
     try {
-        const res = await fetch ('/getavailableusers', {
+        const res = await fetch (`${URL}/getavailableusers`, {
             method: 'GET',
         });
 
@@ -23,7 +23,6 @@ const Availableusers = () => {
         console.log(error)
     }
 }
-const URL = process.env.REACT_APP_BASE_URL;
 useEffect(() => {
   getallusers();
 }, [])

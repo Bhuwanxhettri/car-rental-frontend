@@ -11,7 +11,6 @@ const AdminSignin = () => {
   const [adminPassword, setAdminPassword] = useState("");
   const signinAdmin = async (e) => {
     e.preventDefault();
-
     const res = await fetch(`${URL}/signinAdmin`, {
       method: "POST",
       headers: {

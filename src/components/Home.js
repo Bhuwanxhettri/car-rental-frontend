@@ -112,7 +112,7 @@ const Home = () => {
 
         <NavLink className="logo" to="/">
           {" "}
-          Bike<span>Book</span>
+          Vheciles<h2 className="text-red-400 inline-block">Book</h2>
         </NavLink>
 
         <nav className="navbar">
