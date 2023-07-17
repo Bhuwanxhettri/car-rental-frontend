@@ -8,7 +8,7 @@ const Rentbikereports = () => {
 
   const [income, setIncome] = useState([]);
   let allsoldItems = [];
-  const URL = process.env.REACT_APP_BASE_URL;
+  const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
   const getrentbikeincome = async () => {
     try {
       const res = await fetch(`${URL}/getrentbikeincome`, {
@@ -27,7 +27,7 @@ const Rentbikereports = () => {
     getrentbikeincome();
   }, []);
 
-  income.map((income) => {
+  income?.map((income) => {
     income.soldItems.map((soldItems) => {
       allsoldItems(soldItems);
     });

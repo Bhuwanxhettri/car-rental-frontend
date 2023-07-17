@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { AdminContext } from "../App";
 
@@ -9,27 +11,39 @@ const AdminSignin = () => {
   const adminHistory = useNavigate();
   const [adminName, setAdminName] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const signinAdmin = async (e) => {
     e.preventDefault();
-    const res = await fetch(`${URL}/signinAdmin`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        adminName,
-        adminPassword,
-      }),
-    });
-    const data = res.json();
+    setIsLoading(true);
 
-    if (res.status === 400 || !data) {
-      window.alert("invalid Credentials");
-    } else {
-      dispatchadmin({ type: "ADMIN", payload: true });
-      window.alert("Signin Successfull");
-      adminHistory("/dashboard");
+    try {
+      const res = await fetch(`${URL}/signinAdmin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          adminName,
+          adminPassword,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.status === 400 || !data) {
+        toast.error("Invalid Credentials");
+      } else {
+        dispatchadmin({ type: "ADMIN", payload: true });
+        toast.success("Signin Successful");
+        adminHistory("/dashboard");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred. Please try again.");
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -39,7 +53,7 @@ const AdminSignin = () => {
 
         <a href="#" className="logo">
           {" "}
-          <span>Bike</span>Book{" "}
+          <span>Vehicle</span>Book{" "}
         </a>
 
         <nav className="navbar">
@@ -88,7 +102,15 @@ const AdminSignin = () => {
               </div>
 
               <div className="button">
-                <input type="submit" value="signin" onClick={signinAdmin} />
+                <button type="submit" className="bg-blue-400 w-full text-3xl py-3 text-white" onClick={signinAdmin}>
+                  {isLoading ? (
+                    <>
+                      Loading...
+                    </>
+                  ) : (
+                    "Signin"
+                  )}
+                </button>
               </div>
             </form>
             <button className="btn">

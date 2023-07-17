@@ -5,7 +5,7 @@ import { UserContext } from "../App";
 
 const Signin = () => {
   const { state, dispatch } = useContext(UserContext);
-  const URL = process.env.REACT_APP_BASE_URL;
+  const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
   //User signin
   const history = useNavigate();
@@ -30,7 +30,7 @@ const Signin = () => {
       window.alert("invalid Credentials");
     } else {
       dispatch({ type: "USER", payload: true });
-      localStorage.setItem("token",data.token);
+      localStorage.setItem("token", data.token);
       window.alert("Signin Successfull");
       history("/");
     }

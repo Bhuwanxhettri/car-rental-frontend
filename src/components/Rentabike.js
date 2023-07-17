@@ -7,7 +7,7 @@ const Rentabike = () => {
   const { state, dispatch } = useContext(UserContext);
 
   const history = useNavigate();
-  const URL = process.env.REACT_APP_BASE_URL;
+  const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
   const [rentBikesData, setRentBikesData] = useState([]);
   const token = localStorage.getItem("token");
 
@@ -119,6 +119,7 @@ const Rentabike = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "authorization": `${localStorage.getItem("token")}`
       },
       body: JSON.stringify({
         itemId,
@@ -310,7 +311,7 @@ const Rentabike = () => {
               />
             </form>
             <button className="bikedbtn" id={index} onClick={showBikeAgain}>
-              show bike
+              show Vheicles
             </button>
           </div>,
         ])}

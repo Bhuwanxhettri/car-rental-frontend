@@ -20,7 +20,7 @@ const Signup = () => {
 
     setUser({ ...user, [name]: value });
   };
-  const URL = process.env.REACT_APP_BASE_URL;
+  const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
   const postData = async (e) => {
     e.preventDefault();

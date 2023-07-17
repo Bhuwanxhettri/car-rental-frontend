@@ -10,7 +10,7 @@ const Mycart = () => {
   const [cartUser, setCartUser] = useState([]);
   const [items, setItems] = useState([]);
   let itemsPrice;
-  const URL = process.env.REACT_APP_BASE_URL;
+  const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
   const getCartData = async () => {
     try {
@@ -58,7 +58,7 @@ const Mycart = () => {
   };
 
   const updateDataBase = () => {
-    return fetch(`${URL}/updateDataBase`, {
+    return fetch(`${URL}/updateRentDataBase`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

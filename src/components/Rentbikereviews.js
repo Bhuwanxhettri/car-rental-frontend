@@ -5,7 +5,7 @@ import { UserContext } from "../App";
 
 const Rentbikereviews = () => {
   const { state, dispatch } = useContext(UserContext);
-  const URL = process.env.REACT_APP_BASE_URL;
+  const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
   let location = useLocation();
   const selectedBikeId = location.state;

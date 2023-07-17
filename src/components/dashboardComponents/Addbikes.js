@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { AdminContext } from "../../App";
 
 const Addbikes = () => {
   const { adminState, dispatchadmin } = useContext(AdminContext);
-  const URL = process.env.REACT_APP_BASE_URL;
+  const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
   const history = useNavigate();
   const [file, setFile] = useState();
@@ -99,7 +99,21 @@ const Addbikes = () => {
       method: "POST",
       body: rentData,
     });
+
+    if (res.status === 201) {
+      setRentBike({
+        brand: "",
+        model: "",
+        year: "",
+        color: "",
+        seats: "",
+        price: "",
+        rent: "",
+      })
+    }
   };
+
+
 
   const Loginbutton = () => {
     if (adminState) {
@@ -124,6 +138,10 @@ const Addbikes = () => {
       );
     }
   };
+
+  useEffect(() => {
+   
+  }, [rentbike])
 
   return (
     <>
@@ -181,99 +199,138 @@ const Addbikes = () => {
             <span className="admin_name">Admin</span>
           </div>
         </nav>
-
-        <div className="home-content">
+        <div className="home-content ">
           <div className="sales-boxes">
             {/* Rent File */}
             <div className="recent-sales box">
-              <h1 className="heading">
+              <h1 className="text-3xl py-8">
                 <span>Add Bikes For Rent</span>
               </h1>
               <form
                 method="POST"
-                className="addbikeform"
+                className="grid grid-cols-2 gap-6"
                 name="rentform"
                 id="myrentform"
               >
-                <label htmlFor="fname">Brand: </label>
-                <input
-                  type="text"
-                  name="brand"
-                  id="brand"
-                  value={rentbike.brand}
-                  onChange={handleRentInputs}
-                  placeholder="Enter Bike Brand"
-                />
-                <br />
-                <label htmlFor="lname">Model: </label>
-                <input
-                  type="text"
-                  name="model"
-                  id="model"
-                  value={rentbike.model}
-                  onChange={handleRentInputs}
-                  placeholder="Enter Bike Model"
-                />
-                <br />
-                <label htmlFor="fname">Year: </label>
-                <input
-                  type="text"
-                  name="year"
-                  id="year"
-                  value={rentbike.year}
-                  onChange={handleRentInputs}
-                  placeholder="Manufacturing Year"
-                />
-                <br />
-                <label htmlFor="fname">Color: </label>
-                <input
-                  type="text"
-                  name="color"
-                  id="color"
-                  value={rentbike.color}
-                  onChange={handleRentInputs}
-                  placeholder="Enter Bike Color"
-                />
-                <br />
-                <label htmlFor="lname">Seats: </label>
-                <input
-                  type="text"
-                  name="seats"
-                  id="seats"
-                  value={rentbike.seats}
-                  onChange={handleRentInputs}
-                  placeholder="Enter Bike Seats"
-                />
-                <br />
-                <label htmlFor="lname">Bike Price: </label>
-                <input
-                  type="text"
-                  name="price"
-                  id="price"
-                  value={rentbike.price}
-                  onChange={handleRentInputs}
-                  placeholder="Enter bike price"
-                />
-                <br />
-                <label htmlFor="lname">Bike Rent: </label>
-                <input
-                  type="text"
-                  name="rent"
-                  id="rent"
-                  value={rentbike.rent}
-                  onChange={handleRentInputs}
-                  placeholder="Enter rent per hour"
-                />
-                <br />
-                <label htmlFor="fname">Picture: </label>
-                <input
-                  type="file"
-                  name="image"
-                  id="image"
-                  onChange={handleRentFile}
-                />
-                <div className="button">
-                  <input type="submit" name="submit" onClick={postRentData} />
+                <div className="mb-4">
+                  <label htmlFor="brand" className="block text-3xl font-medium text-gray-700">
+                    Brand:
+                  </label>
+                  <input
+                    type="text"
+                    name="brand"
+                    id="brand"
+                    value={rentbike.brand}
+                    onChange={handleRentInputs}
+                    placeholder="Enter Bike Brand"
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-3xl border-gray-300 rounded-md"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="model" className="block text-3xl font-medium text-gray-700">
+                    Model:
+                  </label>
+                  <input
+                    type="text"
+                    name="model"
+                    id="model"
+                    value={rentbike.model}
+                    onChange={handleRentInputs}
+                    placeholder="Enter Bike Model"
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-3xl border-gray-300 rounded-md"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="year" className="block text-3xl font-medium text-gray-700">
+                    Year:
+                  </label>
+                  <input
+                    type="text"
+                    name="year"
+                    id="year"
+                    value={rentbike.year}
+                    onChange={handleRentInputs}
+                    placeholder="Manufacturing Year"
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-3xl border-gray-300 rounded-md"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="color" className="block text-3xl font-medium text-gray-700">
+                    Color:
+                  </label>
+                  <input
+                    type="text"
+                    name="color"
+                    id="color"
+                    value={rentbike.color}
+                    onChange={handleRentInputs}
+                    placeholder="Enter Bike Color"
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-3xl border-gray-300 rounded-md"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="seats" className="block text-3xl font-medium text-gray-700">
+                    Seats:
+                  </label>
+                  <input
+                    type="text"
+                    name="seats"
+                    id="seats"
+                    value={rentbike.seats}
+                    onChange={handleRentInputs}
+                    placeholder="Enter Bike Seats"
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-3xl border-gray-300 rounded-md"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="price" className="block text-3xl font-medium text-gray-700">
+                    Bike Price:
+                  </label>
+                  <input
+                    type="text"
+                    name="price"
+                    id="price"
+                    value={rentbike.price}
+                    onChange={handleRentInputs}
+                    placeholder="Enter bike price"
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-3xl border-gray-300 rounded-md"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="rent" className="block text-3xl font-medium text-gray-700">
+                    Bike Rent:
+                  </label>
+                  <input
+                    type="text"
+                    name="rent"
+                    id="rent"
+                    value={rentbike.rent}
+                    onChange={handleRentInputs}
+                    placeholder="Enter rent per hour"
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-3xl border-gray-300 rounded-md"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="image" className="block text-3xl font-medium text-gray-700">
+                    Picture:
+                  </label>
+                  <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    onChange={handleRentFile}
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-3xl border-gray-300 rounded-md"
+                  />
+                </div>
+                <div className="mb-4">
+                  <button
+                    type="submit"
+                    name="submit"
+                    onClick={postRentData}
+                    className="inline-flex w-full justify-center py-2 px-4 border border-transparent shadow-sm text-3xl font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Submit
+                  </button>
                 </div>
               </form>
             </div>

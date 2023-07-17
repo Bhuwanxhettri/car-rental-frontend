@@ -13,7 +13,7 @@ const Home = () => {
 
   const { state, dispatch } = useContext(UserContext);
 
-  const URL = process.env.REACT_APP_BASE_URL;
+  const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
   const userContact = async () => {
     try {

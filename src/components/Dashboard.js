@@ -41,7 +41,7 @@ const Dashboard = () => {
       return (
         <div>
           <button className="logoutbtnDash">
-            <NavLink className="nav-link" to="/adminsignout">
+            <NavLink className="nav-link" to="/">
               logout
             </NavLink>
           </button>
@@ -63,7 +63,7 @@ const Dashboard = () => {
       <div className="sidebar">
         <div className="logo-details">
           <i className=""></i>
-          <span className="logo_name1">Vhecile</span>
+          <span className="text-black text-3xl font-bold">Vhecile</span>
           <span className="logo_name">Book</span>
         </div>
         <ul className="nav-links">
@@ -76,14 +76,14 @@ const Dashboard = () => {
           <li>
             <NavLink className="dashlinks" to="/addbikes">
               <i class="fa-sharp fa-solid fa-square-plus"></i>
-              <span className="allLinks_name">Add Bikes</span>
+              <span className="allLinks_name">Add  Vhecile</span>
             </NavLink>
           </li>
 
           <li>
             <NavLink className="dashlinks" to="/getrentbikesforadmin">
               <i class="fa-sharp fa-solid fa-motorcycle"></i>
-              <span className="allLinks_name">Available Rent Vheciles</span>
+              <span className="allLinks_name">Available Rent Vhecile</span>
             </NavLink>
           </li>
 
@@ -117,7 +117,7 @@ const Dashboard = () => {
           </div>
         </nav>
 
-        <div className="home-content" style={{ textAlign: "center" }}>
+        <div className="home-content text-3xl" style={{ textAlign: "center" }}>
           <h1>WELCOME TO DASHBOARD</h1>
           <br />
           <h3>Go To Add Bikes Tab In Side Menu To Add Bikes In Database</h3>

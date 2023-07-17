@@ -6,18 +6,21 @@ import { UserContext } from "../App";
 
 const Rentbikecart = () => {
   const { state, dispatch } = useContext(UserContext);
-  const URL = process.env.REACT_APP_BASE_URL;
+  const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
   const [cartUser, setCartUser] = useState([]);
   const [items, setItems] = useState([]);
   let itemsPrice, idOfRentedBike, reqHours;
+  const token = localStorage.getItem("token");
 
   const getCartData = async () => {
     try {
       const res = await fetch(`${URL}/getRentCartData`, {
         method: "GET",
+        headers: {
+          Authorization: `${token}`,
+        },
       });
-
       const data = await res.json();
       setCartUser(data.userById);
       setItems(data.cartItems);
@@ -137,7 +140,7 @@ const Rentbikecart = () => {
             </div>
           ))}
           <div style={{ padding: "30px", textAlign: "center" }}>
-            <h2>Pay Through Credit / Debit Biked</h2>
+            <h2>Pay Through Credit / Debit Vhecile</h2>
             <br />
             <Stripe
               stripeKey="pk_test_51Jyb5UBvc4Qazj8jy6qimLop4epxe5jziUD3ixj5ISycjjD6yYVGZhk688Pz9Lna32VTHbSHxRwkrvNNnnnr96P000M68u5jcd"

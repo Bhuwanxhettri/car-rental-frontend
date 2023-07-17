@@ -7,7 +7,7 @@ const Availableusers = () => {
   const {adminState, dispatchadmin} = useContext(AdminContext)
 
   const [getUsers, setGetUsers] = useState([]);
-  const URL = process.env.REACT_APP_BASE_URL;
+  const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
   const getallusers = async () =>{
     try {
