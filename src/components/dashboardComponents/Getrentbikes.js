@@ -307,7 +307,7 @@ const Getrentbikes = () => {
       return (
         <div>
           <button className="logoutbtnDash">
-            <NavLink className="nav-link" to="/adminsignout">
+            <NavLink className="nav-link" to="/">
               logout
             </NavLink>
           </button>
